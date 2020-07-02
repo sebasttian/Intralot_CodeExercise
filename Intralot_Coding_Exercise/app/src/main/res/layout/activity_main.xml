@@ -4,22 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".UI.MainActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_DisplayResults"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/editText"
-        app:layout_constraintStart_toStartOf="@+id/editText"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        android:text="@string/display_results"
+        app:layout_constraintEnd_toEndOf="@+id/et_EnterLocation"
+        app:layout_constraintStart_toStartOf="@+id/et_EnterLocation"
+        app:layout_constraintTop_toBottomOf="@+id/et_EnterLocation"
         tools:text="Display Results">
 
     </Button>
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/et_EnterLocation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -31,25 +32,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/enter_your_location"></EditText>
+        tools:text="@string/enter_your_location"/>
 
     <ListView
-        android:id="@+id/summary"
+        android:id="@+id/lw_summary"
         android:layout_width="0dp"
         android:layout_height="250dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="@+id/btn_DisplayResults"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintStart_toStartOf="@+id/btn_DisplayResults"
+        app:layout_constraintTop_toBottomOf="@+id/btn_DisplayResults" />
 
     <ListView
-        android:id="@+id/list_of_PT"
+        android:id="@+id/lw_list_of_PT"
         android:layout_width="0dp"
         android:layout_height="250dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/summary"
-        app:layout_constraintStart_toStartOf="@+id/summary"
-        app:layout_constraintTop_toBottomOf="@+id/summary" />
+        app:layout_constraintEnd_toEndOf="@+id/lw_summary"
+        app:layout_constraintStart_toStartOf="@+id/lw_summary"
+        app:layout_constraintTop_toBottomOf="@+id/lw_summary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
