@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Intralot_Coding_Exercise</string>
     <string name="enter_your_location">Enter Your Location</string>
+    <string name="display_results">Display Results</string>
 </resources>

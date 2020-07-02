@@ -3,6 +3,9 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
 
+    buildFeatures {
+        viewBinding = true
+    }
 
     defaultConfig {
         applicationId "com.ss.intralot_coding_exercise"
