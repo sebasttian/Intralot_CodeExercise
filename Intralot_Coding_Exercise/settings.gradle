@@ -1,0 +1,2 @@
+rootProject.name='Intralot_Coding_Exercise'
+include ':app'
