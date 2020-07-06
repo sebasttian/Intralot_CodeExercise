@@ -5,15 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
+import com.ss.intralot_coding_exercise.R;
+import com.ss.intralot_coding_exercise.adapters.PTListViewAdapter;
 import com.ss.intralot_coding_exercise.databinding.ActivityMainBinding;
 import com.ss.intralot_coding_exercise.models.PhysicalTherapist;
 import com.ss.intralot_coding_exercise.services.YelpService;
+
+import net.mintern.primitive.Primitive;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -28,28 +32,36 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
     private ActivityMainBinding binding;
     public ArrayList<PhysicalTherapist> physicalTherapists = new ArrayList<>();
+    private PTListViewAdapter ptLWAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        final ListView mSummary =  binding.lwSummary;
+
+        final ListView mPTList = binding.lwListOfPT;
+        final TextView mTotal = binding.tvTotal;
+        final TextView mTotalRating = binding.tvTotalWithRatings;
+        final TextView mNumberOfPT = binding.tvNumberOfPT;
+        final TextView mTotalReviews = binding.tvTotalReview;
 
         Button mDisplayResults = binding.btnDisplayResults;
         mDisplayResults.setOnClickListener(new View.OnClickListener() {
 
             EditText mLocation = binding.etEnterLocation;
+
             @Override
             public void onClick(View view) {
-                getPT(mLocation.getText().toString(), mSummary);
+                getPT(mLocation.getText().toString(), mPTList, mTotal, mTotalRating, mNumberOfPT, mTotalReviews);
             }
         });
 
     }
 
-    private void getPT(String location, final ListView _summary) {
+    private void getPT(String location, final ListView _listOfPT, final TextView _total, final TextView _totalWithRatings, final TextView _numberOfPT, final TextView _totalReview) {
         final YelpService yelpService = new YelpService();
         yelpService.findPT(location, new Callback() {
             @Override
@@ -59,27 +71,40 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-//                    String jsonData = response.body().string();
-//                    Log.v(TAG, jsonData);
                     physicalTherapists = yelpService.processResults(response);
                     MainActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            String[] physicalTherapistNames = new String[physicalTherapists.size()];
-                            for (int i = 0; i < physicalTherapistNames.length; i++) {
-                                physicalTherapistNames[i] = physicalTherapists.get(i).getName();
+
+                            String[] ptRatingAverage = new String[physicalTherapists.size()];
+                            double ratingAverage = 0 ;
+                            int total = 0;
+                            int totalReviews = 0;
+
+                            double[] ratingArray = new double[ptRatingAverage.length];
+
+                            for (int i = 0; i < ptRatingAverage.length; i++) {
+                                ratingAverage += physicalTherapists.get(i).getRating();
+                                total = physicalTherapists.get(i).getTotal();
+                                totalReviews += physicalTherapists.get(i).getReviews();
+                                ratingArray[i] = physicalTherapists.get(i).getRating();
+                                Log.d(TAG, "run: " + ratingArray[i]);
                             }
 
-                            ArrayAdapter adapter = new ArrayAdapter(MainActivity.this,
-                                    android.R.layout.simple_list_item_1, physicalTherapistNames);
-                            _summary.setAdapter(adapter);
+                            Primitive.sort(ratingArray,(d1, d2) -> Double.compare(d2, d1), false);
 
-                            for(PhysicalTherapist physicalTherapist: physicalTherapists) {
-                                Log.d(TAG, "Name: " + physicalTherapist.getName());
-                                Log.d(TAG, "Review: " + Integer.toString(physicalTherapist.getReviews()));
-                                Log.d(TAG, "Rating: " + Double.toString(physicalTherapist.getRating()));
-                                Log.d(TAG, "Address: " + android.text.TextUtils.join(", ", physicalTherapist.getAddress()));
-                            }
+                            double avg = ratingAverage / ptRatingAverage.length;
+
+                            String totalPTText = getString(R.string.total, total);
+                            String averagePTRatingText = getString(R.string.totalwithratings, avg);
+
+                            _numberOfPT.setText(getString(R.string.number_of_pt, total));
+                            _total.setText(totalPTText);
+                            _totalWithRatings.setText(averagePTRatingText);
+                            _totalReview.setText(getString(R.string.total_reviews, totalReviews));
+
+                            ptLWAdapter = new PTListViewAdapter(physicalTherapists, getApplicationContext());
+                            _listOfPT.setAdapter(ptLWAdapter);
                         }
                     });
             }

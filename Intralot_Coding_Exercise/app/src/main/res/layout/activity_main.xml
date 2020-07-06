@@ -32,25 +32,55 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/enter_your_location"/>
-
-    <ListView
-        android:id="@+id/lw_summary"
-        android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="@+id/btn_DisplayResults"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btn_DisplayResults"
-        app:layout_constraintTop_toBottomOf="@+id/btn_DisplayResults" />
+        tools:text="@string/enter_your_location" />
 
     <ListView
         android:id="@+id/lw_list_of_PT"
         android:layout_width="0dp"
-        android:layout_height="250dp"
+        android:layout_height="350dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/lw_summary"
-        app:layout_constraintStart_toStartOf="@+id/lw_summary"
-        app:layout_constraintTop_toBottomOf="@+id/lw_summary" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_totalReview"
+        app:layout_constraintStart_toStartOf="@+id/tv_totalReview"
+        app:layout_constraintTop_toBottomOf="@+id/tv_totalReview" />
+
+    <TextView
+        android:id="@+id/tv_total"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/btn_DisplayResults"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btn_DisplayResults"
+        app:layout_constraintTop_toBottomOf="@+id/tv_numberOfPT"
+        tools:text="@string/total" />
+
+    <TextView
+        android:id="@+id/tv_numberOfPT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_DisplayResults"
+        app:layout_constraintStart_toStartOf="@+id/btn_DisplayResults"
+        app:layout_constraintTop_toBottomOf="@+id/btn_DisplayResults"
+        tools:text="@string/number_of_pt" />
+
+    <TextView
+        android:id="@+id/tv_totalWithRatings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tv_total"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_total"
+        app:layout_constraintTop_toBottomOf="@+id/tv_total"
+        tools:text="@string/totalwithratings" />
+
+    <TextView
+        android:id="@+id/tv_totalReview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tv_total"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_total"
+        app:layout_constraintTop_toBottomOf="@+id/tv_totalWithRatings"
+        tools:text="@string/total_reviews" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
