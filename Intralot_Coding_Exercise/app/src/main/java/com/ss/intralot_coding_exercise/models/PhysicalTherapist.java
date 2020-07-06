@@ -12,12 +12,14 @@ public class PhysicalTherapist {
     private double rating;
     private int reviews;
     private ArrayList<String> address = new ArrayList<>();
+    private int total;
 
-    public PhysicalTherapist(String name, double rating, int reviews, ArrayList<String> address) {
+    public PhysicalTherapist(String name, double rating, int reviews, ArrayList<String> address, int total) {
         this.name = name;
         this.rating = rating;
         this.reviews = reviews;
         this.address = address;
+        this.total = total;
     }
 
     public String getName() {
@@ -34,5 +36,9 @@ public class PhysicalTherapist {
 
     public ArrayList<String> getAddress() {
         return address;
+    }
+
+    public int getTotal() {
+        return total;
     }
 }

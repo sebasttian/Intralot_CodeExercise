@@ -2,4 +2,12 @@
     <string name="app_name">Intralot_Coding_Exercise</string>
     <string name="enter_your_location">Enter Your Location</string>
     <string name="display_results">Display Results</string>
+    <string name="physical_therapist_s_name">Physical Therapist\'s Name</string>
+    <string name="rating">Rating: %1$f/5</string>
+    <string name="review">Review</string>
+    <string name="total">Total PTs with ratings: %1$d</string>
+    <string name="totalwithratings">Average Rating for the PTs in the area: %1$f</string>
+    <string name="number_of_pt">Number of PTs in the area: %1$d</string>
+    <string name="total_reviews">Total number of reviews for the given results: %1$d</string>
+    <string name="address">Address</string>
 </resources>

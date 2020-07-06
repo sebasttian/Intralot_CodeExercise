@@ -48,6 +48,8 @@ public class YelpService {
             JSONObject yelpJSON = new JSONObject(jsonData);
             JSONArray businessesJSON = yelpJSON.getJSONArray("businesses");
 
+            int total = yelpJSON.getInt("total");
+
             for (int i = 0; i < businessesJSON.length(); i++) {
                 JSONObject ptJSON = businessesJSON.getJSONObject(i);
                 String name = ptJSON.getString("name");
@@ -61,7 +63,7 @@ public class YelpService {
                     address.add(addressJSON.get(j).toString());
                 }
 
-                PhysicalTherapist physicalTherapist = new PhysicalTherapist(name,rating,reviews,address);
+                PhysicalTherapist physicalTherapist = new PhysicalTherapist(name, rating, reviews, address, total);
                 physicalTherapists.add(physicalTherapist);
             }
         } catch (IOException | JSONException e){
